@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-16T03:29:10Z",
+  "generated_at": "2026-02-16T03:35:25Z",
   "skills": [
     {
       "slug": "openclaw-manager",
@@ -22,11 +22,11 @@
     {
       "slug": "plugin-skill-marketplace-publisher",
       "name": "Plugin Skill Marketplace Publisher",
-      "version": "0.1.0",
-      "status": "published",
+      "version": "0.1.1",
+      "status": "draft",
       "source_path": "skills/plugin-skill-marketplace-publisher",
       "package_path": "packages/plugin-skill-marketplace-publisher/plugin-skill-marketplace-publisher-skill.zip",
-      "sha256": "0f8012d0341f7fd85e37784b6b75a72fe0df8512e0fd2df8b4960bf0b62434b4"
+      "sha256": "7789376db1b452d6eab47bb27b1aa61ea14132e74f7c0062b56a30542aa2b709"
     }
   ]
 }
