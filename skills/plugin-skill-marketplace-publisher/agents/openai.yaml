@@ -1,0 +1,4 @@
+interface:
+  display_name: "Plugin + Skill Publisher"
+  short_description: "Ship Claude plugins and Agent Skills metadata."
+  default_prompt: "Use $plugin-skill-marketplace-publisher to create a new Claude plugin or Agent Skills spec skill and sync marketplace plus database metadata."

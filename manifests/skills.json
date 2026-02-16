@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-16T03:28:30Z",
+  "generated_at": "2026-02-16T03:29:10Z",
   "skills": [
     {
       "slug": "openclaw-manager",
@@ -18,6 +18,15 @@
       "source_path": "skills/mcp-app-builder",
       "package_path": "packages/mcp-app-builder/mcp-app-builder-skill.zip",
       "sha256": "580dc36c9f889f8c196ed7df245d0251cf8402e470d11fd376210161c54596c7"
+    },
+    {
+      "slug": "plugin-skill-marketplace-publisher",
+      "name": "Plugin Skill Marketplace Publisher",
+      "version": "0.1.0",
+      "status": "published",
+      "source_path": "skills/plugin-skill-marketplace-publisher",
+      "package_path": "packages/plugin-skill-marketplace-publisher/plugin-skill-marketplace-publisher-skill.zip",
+      "sha256": "0f8012d0341f7fd85e37784b6b75a72fe0df8512e0fd2df8b4960bf0b62434b4"
     }
   ]
 }
