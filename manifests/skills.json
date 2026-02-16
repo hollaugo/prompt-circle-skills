@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-02-14T07:30:07Z",
+  "generated_at": "2026-02-16T03:27:54Z",
   "skills": [
     {
       "slug": "openclaw-manager",
       "name": "OpenClaw Manager",
-      "version": "0.1.0",
-      "status": "draft",
+      "version": "0.2.0",
+      "status": "published",
       "source_path": "skills/openclaw-manager",
       "package_path": "packages/openclaw-manager/openclaw-manager-skill.zip",
-      "sha256": "efb5b6cac6642658d5cad874fb367b889a65d43f5d6b48297f6f629fd7e9584d"
+      "sha256": "00fa33d314073d8e8d023bef085baead526c61ade14d2d2ba9a9dbd7291d381a"
     }
   ]
 }
