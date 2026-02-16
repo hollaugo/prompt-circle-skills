@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-16T03:27:54Z",
+  "generated_at": "2026-02-16T03:28:30Z",
   "skills": [
     {
       "slug": "openclaw-manager",
@@ -9,6 +9,15 @@
       "source_path": "skills/openclaw-manager",
       "package_path": "packages/openclaw-manager/openclaw-manager-skill.zip",
       "sha256": "00fa33d314073d8e8d023bef085baead526c61ade14d2d2ba9a9dbd7291d381a"
+    },
+    {
+      "slug": "mcp-app-builder",
+      "name": "Mcp App Builder",
+      "version": "0.1.0",
+      "status": "published",
+      "source_path": "skills/mcp-app-builder",
+      "package_path": "packages/mcp-app-builder/mcp-app-builder-skill.zip",
+      "sha256": "580dc36c9f889f8c196ed7df245d0251cf8402e470d11fd376210161c54596c7"
     }
   ]
 }
