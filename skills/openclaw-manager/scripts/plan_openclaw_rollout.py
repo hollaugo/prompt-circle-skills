@@ -38,7 +38,7 @@ OS_NOTES = {
     "windows-wsl2": "Run commands inside WSL2 Linux shell and avoid mixed Windows/WSL paths.",
 }
 
-DEFAULT_LEDGER_FILE = "/Users/uosuji/prompt-circle-phoenix/prompt-circle-website/docs/ops/openclaw-manager-operations-ledger.md"
+DEFAULT_LEDGER_FILE = "openclaw-manager-operations-ledger.md"
 
 
 def parse_csv(raw: str, *, allowed: set[str], label: str) -> list[str]:

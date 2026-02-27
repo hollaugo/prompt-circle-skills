@@ -22,13 +22,6 @@ PLACEHOLDER_PATTERNS = (
 KEY_RE = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*$")
 HEX_RE = re.compile(r"^[0-9a-fA-F]+$")
 
-# canonical_key -> aliases
-ALIASES = {
-    "OPENCLAW_GATEWAY_TOKEN": ["CLAWDBOT_GATEWAY_TOKEN", "MOLTBOT_GATEWAY_TOKEN"],
-    "OPENAI_API_KEY": ["OPENAI_KEY"],
-    "ANTHROPIC_API_KEY": ["ANTHROPIC_KEY"],
-}
-
 PROFILE_CONFIG = {
     "local": {
         "required": ["OPENCLAW_GATEWAY_TOKEN"],
@@ -108,31 +101,6 @@ def parse_require_any(values: list[str]) -> list[list[str]]:
     return groups
 
 
-def normalize_aliases(values: dict[str, str]):
-    normalized = dict(values)
-    warnings: list[str] = []
-    errors: list[str] = []
-
-    for canonical, aliases in ALIASES.items():
-        canonical_value = normalized.get(canonical)
-        alias_values = [(alias, normalized.get(alias)) for alias in aliases if alias in normalized]
-        if not alias_values:
-            continue
-
-        if canonical_value is None:
-            alias_name, alias_value = alias_values[0]
-            normalized[canonical] = alias_value
-            warnings.append(f"legacy alias '{alias_name}' mapped to '{canonical}'")
-        else:
-            for alias_name, alias_value in alias_values:
-                if alias_value != canonical_value:
-                    errors.append(
-                        f"alias conflict: '{canonical}' and '{alias_name}' have different values"
-                    )
-
-    return normalized, warnings, errors
-
-
 def check_secret_strength(values: dict[str, str]):
     weak: list[str] = []
 
@@ -189,7 +157,7 @@ def main() -> int:
         return 1
 
     values, duplicates, malformed = parse_env(env_path)
-    normalized, alias_warnings, alias_errors = normalize_aliases(values)
+    normalized = values
 
     profile = PROFILE_CONFIG[args.profile]
     required_keys = sorted(set(profile["required"] + args.require))
@@ -233,10 +201,7 @@ def main() -> int:
         errors.append("placeholder values detected")
     if weak_secrets:
         errors.append("weak secrets detected")
-    if alias_errors:
-        errors.extend(alias_errors)
 
-    warnings.extend(alias_warnings)
     if recommended_missing:
         warnings.append(
             "recommended keys missing for profile: " + ", ".join(recommended_missing)

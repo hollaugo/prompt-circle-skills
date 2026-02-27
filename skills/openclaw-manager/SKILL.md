@@ -32,6 +32,8 @@ runtime_metadata:
     - provider_secret_writes
     - public_network_exposure
     - persistent_state_changes
+  required_env_vars:
+    - OPENCLAW_GATEWAY_TOKEN
 ---
 
 # OpenClaw Manager
@@ -53,7 +55,7 @@ Automation helpers:
 - `scripts/update_openclaw_ops_ledger.py`
 
 Default ops ledger path:
-- `/Users/uosuji/prompt-circle-phoenix/prompt-circle-website/docs/ops/openclaw-manager-operations-ledger.md`
+- `./openclaw-manager-operations-ledger.md` (or operator specified)
 
 ## Hard-Stop Rules (Never Bypass)
 Stop and block deployment/install progression if any condition is true:
@@ -79,7 +81,7 @@ Before proceeding, write a `scope_lock` ledger entry:
 
 ```bash
 python3 scripts/update_openclaw_ops_ledger.py \
-  --ledger-file /Users/uosuji/prompt-circle-phoenix/prompt-circle-website/docs/ops/openclaw-manager-operations-ledger.md \
+  --ledger-file ./openclaw-manager-operations-ledger.md \
   --event scope_lock \
   --operator codex \
   --mode hosted \
@@ -108,7 +110,7 @@ python3 scripts/plan_openclaw_rollout.py \
   --integrations email,calendar \
   --environment prod \
   --exposure public \
-  --ledger-file /Users/uosuji/prompt-circle-phoenix/prompt-circle-website/docs/ops/openclaw-manager-operations-ledger.md \
+  --ledger-file ./openclaw-manager-operations-ledger.md \
   --output /tmp/openclaw-rollout.md
 ```
 
