@@ -1,8 +1,8 @@
-# Prompt Circle Inbound CRM SOP (Template)
+# Default Inbound CRM SOP (Template)
 
 ## 1) Business Context
 
-Prompt Circle is an education business focused on AI Automation and Agentic Systems.
+[Your Business Name] is an education business focused on AI Automation and Agentic Systems.
 Core outcomes:
 
 - teach practical AI automation and agent workflows
@@ -49,7 +49,7 @@ Classify as `ignore` when inbound is not a real business opportunity:
 
 ### 2.4 `support` Definition
 
-- direct help/problem request about Prompt Circle services/content operations
+- direct help/problem request about [Your Business Name] services/content operations
 
 ## 3) Hard Inclusion Examples (Must classify as `sales`)
 
@@ -74,7 +74,7 @@ Before drafting, confirm:
 ## 6) Lead Handling Workflow
 
 1. Research sender/company website and offering.
-2. Assess fit with Prompt Circle audience and values.
+2. Assess fit with [Your Business Name] audience and values.
 3. If fit is unclear, ask clarifying questions (objective, deliverables, timeline, budget).
 4. Create draft response for review.
 5. Log lead/activity to database.

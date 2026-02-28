@@ -29,9 +29,9 @@ metadata:
 
 Use this skill for hourly polling CRM workflows across:
 
-- `pat.ugosuji@gmail.com`
-- `info@promptcircle.com`
-- `ugo@promptcircle.com`
+- `info@yourdomain.com`
+- `sales@yourdomain.com`
+- `support@yourdomain.com`
 
 The source-of-truth SOP is synced from Notion page `CRM_SOP_PAGE_ID` every run.
 

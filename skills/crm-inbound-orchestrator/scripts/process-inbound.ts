@@ -772,7 +772,7 @@ function parseFirstJsonObject(text: string): Record<string, unknown> | undefined
   try {
     const parsed = JSON.parse(direct) as unknown;
     return getRecord(parsed);
-  } catch {}
+  } catch { }
 
   const match = direct.match(/\{[\s\S]*\}/);
   if (!match) {
@@ -959,9 +959,9 @@ async function classifyInbound(args: {
     const normalizedLabel = labelRaw.replace(/[^a-z]/g, "");
     const label =
       normalizedLabel === "receipt" ||
-      normalizedLabel === "sales" ||
-      normalizedLabel === "support" ||
-      normalizedLabel === "ignore"
+        normalizedLabel === "sales" ||
+        normalizedLabel === "support" ||
+        normalizedLabel === "ignore"
         ? normalizedLabel
         : undefined;
     if (!label) {
@@ -1105,11 +1105,11 @@ function buildSalesDraftFallback(args: {
   sopCues: string[];
 }): { subject: string; body: string } {
   const firstName = firstNameFromDisplay(args.senderDisplayName);
-  const intentSnippet = args.snippet?.trim() || "Thanks for reaching out to Prompt Circle.";
+  const intentSnippet = args.snippet?.trim() || "Thanks for reaching out.";
 
   const subject = args.subject?.toLowerCase().startsWith("re:")
     ? args.subject
-    : `Re: ${args.subject ?? "Prompt Circle inquiry"}`;
+    : `Re: ${args.subject ?? "Inquiry"}`;
 
   const body = [
     `Hi ${firstName},`,
@@ -1125,7 +1125,7 @@ function buildSalesDraftFallback(args: {
     "Once we have those details, I can send a concrete recommendation and next steps.",
     "",
     "Best,",
-    "Prompt Circle",
+    "[Your Business Name]",
   ].join("\n");
 
   return { subject, body };
@@ -1182,7 +1182,7 @@ async function buildSalesDraft(args: {
     if (subject && body) {
       return { subject, body };
     }
-  } catch {}
+  } catch { }
 
   return buildSalesDraftFallback(args);
 }
@@ -1311,7 +1311,7 @@ async function ensureGmailLabel(account: string, labelName: string): Promise<voi
     );
     ensuredLabelCache.add(cacheKey);
     return;
-  } catch {}
+  } catch { }
 
   await execFileAsync(
     "gog",
@@ -1450,12 +1450,12 @@ async function main() {
     DEFAULT_REPLY_MODEL;
   const useModelClassification = getBool(
     clean(process.env.CRM_USE_MODEL_CLASSIFIER) ||
-      clean(process.env.OPENCLAW_CRM_USE_MODEL_CLASSIFIER),
+    clean(process.env.OPENCLAW_CRM_USE_MODEL_CLASSIFIER),
     true,
   );
   const useModelReplyWriter = getBool(
     clean(process.env.CRM_USE_MODEL_REPLY_WRITER) ||
-      clean(process.env.OPENCLAW_CRM_USE_MODEL_REPLY_WRITER),
+    clean(process.env.OPENCLAW_CRM_USE_MODEL_REPLY_WRITER),
     true,
   );
   const applyLeadLabels = getBool(clean(process.env.CRM_GMAIL_LABEL_APPLY), true);
