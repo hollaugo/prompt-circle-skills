@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-16T03:35:25Z",
+  "generated_at": "2026-03-07T00:00:00Z",
   "skills": [
     {
       "slug": "openclaw-manager",
@@ -27,6 +27,24 @@
       "source_path": "skills/plugin-skill-marketplace-publisher",
       "package_path": "packages/plugin-skill-marketplace-publisher/plugin-skill-marketplace-publisher-skill.zip",
       "sha256": "7789376db1b452d6eab47bb27b1aa61ea14132e74f7c0062b56a30542aa2b709"
+    },
+    {
+      "slug": "business-flow-diagrams",
+      "name": "Business Flow Diagrams",
+      "version": "0.1.0",
+      "status": "published",
+      "source_path": "skills/business-flow-diagrams",
+      "package_path": "packages/business-flow-diagrams/business-flow-diagrams-skill.zip",
+      "sha256": "1a9bb7894a6422d6216429d9036cafcd839157c2e5aa1c45e757a9485a9f1cfb"
+    },
+    {
+      "slug": "accounting-reconciliation",
+      "name": "Accounting Reconciliation",
+      "version": "0.1.0",
+      "status": "published",
+      "source_path": "skills/accounting-reconciliation",
+      "package_path": "packages/accounting-reconciliation/accounting-reconciliation-skill.zip",
+      "sha256": "06f1cbb6ec600863c5905caeabb18a8c30dbc3fc8ba37a2f9eb57829e9003037"
     }
   ]
 }
