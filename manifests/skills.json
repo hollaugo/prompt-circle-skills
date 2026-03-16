@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-07T00:00:00Z",
+  "generated_at": "2026-03-16T00:00:00Z",
   "skills": [
     {
       "slug": "openclaw-manager",
@@ -45,6 +45,15 @@
       "source_path": "skills/accounting-reconciliation",
       "package_path": "packages/accounting-reconciliation/accounting-reconciliation-skill.zip",
       "sha256": "06f1cbb6ec600863c5905caeabb18a8c30dbc3fc8ba37a2f9eb57829e9003037"
+    },
+    {
+      "slug": "openclaw-shopify",
+      "name": "OpenClaw Shopify",
+      "version": "0.1.0",
+      "status": "published",
+      "source_path": "skills/openclaw-shopify",
+      "package_path": "packages/openclaw-shopify/openclaw-shopify-skill.zip",
+      "sha256": "736350ea225bfadd1e8d9c9b19775297da68ea35a22d18c736afb7c80197f0a3"
     }
   ]
 }
