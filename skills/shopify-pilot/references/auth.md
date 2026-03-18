@@ -8,7 +8,7 @@ you generate a short-lived access token programmatically.
 
 **Constraints:**
 - Only works for apps you developed AND stores you own
-- Tokens expire after 24 hours — request a fresh one each session
+- Tokens expire after 24 hours — the Python helper below handles renewal automatically
 - For apps serving other merchants, use managed OAuth instead
 
 ---
@@ -58,12 +58,12 @@ Drop this into your OpenClaw agent code:
 ```python
 import os
 import requests
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 _token_cache = {"token": None, "expires_at": None}
 
 def get_shopify_token() -> str:
-    now = datetime.utcnow()
+    now = datetime.now(timezone.utc)
     if (
         _token_cache["token"]
         and _token_cache["expires_at"]
@@ -100,6 +100,7 @@ def shopify_headers() -> dict:
 store = os.environ["SHOPIFY_STORE_DOMAIN"]
 headers = shopify_headers()
 
+# Pin your API version — update when Shopify deprecates this release
 products = requests.get(
     f"https://{store}/admin/api/2024-01/products.json",
     headers=headers
@@ -122,7 +123,7 @@ After adding scopes you must reinstall the app on your store.
 | `write_inventory` | UC6 (optional — for reorder workflows) |
 | `read_customers` | UC4, UC7 |
 | `read_checkouts` | UC4 |
-| `read_price_rules` | UC3 |
+| `read_price_rules` | UC3, UC5 |
 | `write_price_rules` | UC5 |
 | `read_discounts` | UC5 |
 | `write_discounts` | UC5 |
