@@ -120,6 +120,19 @@ async def serve_report(filename: str):
         return HTMLResponse(content=f.read())
 ```
 
+### Flask (disk)
+
+```python
+@app.route("/reports/<filename>")
+def serve_report_disk(filename):
+    filename = os.path.basename(filename)  # prevent path traversal
+    path = os.path.join(REPORTS_DIR, filename)
+    if not os.path.exists(path):
+        abort(404)
+    with open(path, encoding="utf-8") as f:
+        return f.read(), 200, {"Content-Type": "text/html"}
+```
+
 Set `REPORTS_DIR` in your env and point it at persistent storage.
 
 ---

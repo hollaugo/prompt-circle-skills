@@ -93,7 +93,7 @@ Then save the full report as HTML and post the link.
 👀 Watch item: Hydra Mist Toner has had 0 sales for 14 days.
    Consider a 15% promo or featured placement.
 
-📄 Full report → https://YOUR_OPENCLAW_HOST/reports/digest-2026-03-17.html
+📄 Full report → https://your-openclaw-host.example.com/reports/digest-2026-03-17.html
 ```
 
 ---
@@ -142,7 +142,7 @@ Researched: Brand A, Brand B, Brand C, Brand D, Brand E
 • No overnight mask — all 5 competitors carry one
 • No travel-size SKUs — 3 competitors offer them, high review scores
 
-📊 Full pricing comparison → https://YOUR_OPENCLAW_HOST/reports/competitive-intel-2026-03-17.html
+📊 Full pricing comparison → https://your-openclaw-host.example.com/reports/competitive-intel-2026-03-17.html
 ```
 
 ---
@@ -314,7 +314,7 @@ Top 10 by lifetime spend:
 • Emma R. — $1,450 LTV · last order 73 days ago
   → Suggest: personal re-engagement with 15% loyalty code
 
-📄 Full report → https://YOUR_OPENCLAW_HOST/reports/vip-report-2026-03-17.html
+📄 Full report → https://your-openclaw-host.example.com/reports/vip-report-2026-03-17.html
 ```
 
 ---

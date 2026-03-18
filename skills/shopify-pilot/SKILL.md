@@ -64,7 +64,8 @@ Run the token check in `references/auth.md`. A successful response returns a
 | Product Launch Prep | `read_products`, `write_products`, `read_inventory` |
 
 **4. Register the report route** *(optional — only needed for UC2, UC3, and UC7)*
-See `references/report-server.md`.
+Set `OPENCLAW_PUBLIC_URL=https://your-openclaw-host.example.com` in your env
+and see `references/report-server.md`.
 
 ---
 
