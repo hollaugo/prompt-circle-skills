@@ -53,7 +53,7 @@ Run the token check in `references/auth.md`. A successful response returns a
 **3. Grant the right scopes for your use case**
 
 | Use case | Required scopes |
-|---|---|
+| --- | --- |
 | PDP Rewrite | `read_products`, `write_products` |
 | Weekly Digest | `read_orders`, `read_products`, `read_inventory` |
 | Competitive Intel | `read_products`, `read_price_rules` |
@@ -63,7 +63,7 @@ Run the token check in `references/auth.md`. A successful response returns a
 | Customer VIP Report | `read_customers`, `read_orders` |
 | Product Launch Prep | `read_products`, `write_products`, `read_inventory` |
 
-**4. Register the report route (for use cases that generate HTML output)**
+**4. Register the report route** *(optional — only needed for UC2, UC3, and UC7)*
 See `references/report-server.md`.
 
 ---
@@ -71,7 +71,7 @@ See `references/report-server.md`.
 ## Use Case Routing
 
 | You say... | Run |
-|---|---|
+| --- | --- |
 | "rewrite my product description" / "improve my PDP" | UC1 — PDP Rewrite |
 | "weekly digest" / "how did my store do" / "Monday briefing" | UC2 — Weekly Digest |
 | "check my competitors" / "pricing gaps" / "what should I charge" | UC3 — Competitive Intel |
@@ -94,7 +94,7 @@ start of each workflow run — never reuse a token across days. See
 ## Common Errors
 
 | Error | Cause | Fix |
-|---|---|---|
+| --- | --- | --- |
 | `401 Unauthorized` | Wrong client ID or secret | Check env vars against Shopify Dev Dashboard |
 | `403 Forbidden` | Missing API scope | Add scope in Dev Dashboard, reinstall app |
 | `404 on /reports/` | Report route not registered | See `references/report-server.md` |
