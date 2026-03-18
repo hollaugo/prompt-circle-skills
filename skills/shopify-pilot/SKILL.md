@@ -12,8 +12,7 @@ description: >
 
 # Shopify Pilot
 
-Connect OpenClaw to your Shopify store and run agent-driven workflows from any
-channel — Slack, Telegram, or Discord.
+Connect OpenClaw to your Shopify store and run agent-driven workflows from any channel.
 
 Reference files:
 - `references/auth.md` — API auth, 3 env vars, token helper, scope table
@@ -25,7 +24,7 @@ Reference files:
 ## Architecture
 
 ```
-You (Slack / Telegram / Discord)
+You (any channel)
         ↓
    OpenClaw Agent
         ↓
