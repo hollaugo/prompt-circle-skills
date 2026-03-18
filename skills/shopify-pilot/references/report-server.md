@@ -104,8 +104,9 @@ REPORTS_DIR = os.environ.get("REPORTS_DIR", "/data/reports")
 os.makedirs(REPORTS_DIR, exist_ok=True)
 
 def save_report(filename: str, html: str) -> str:
+    filename = os.path.basename(filename)  # prevent path traversal
     path = os.path.join(REPORTS_DIR, filename)
-    with open(path, "w") as f:
+    with open(path, "w", encoding="utf-8") as f:
         f.write(html)
     host = os.environ.get("OPENCLAW_PUBLIC_URL", "http://localhost:8080")
     return f"{host}/reports/{filename}"
@@ -115,7 +116,7 @@ async def serve_report(filename: str):
     path = os.path.join(REPORTS_DIR, filename)
     if not os.path.exists(path):
         raise HTTPException(status_code=404, detail="Report not found")
-    with open(path) as f:
+    with open(path, encoding="utf-8") as f:
         return HTMLResponse(content=f.read())
 ```
 
