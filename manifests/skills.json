@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-16T00:00:00Z",
+  "generated_at": "2026-04-01T00:00:00Z",
   "skills": [
     {
       "slug": "openclaw-manager",
@@ -54,6 +54,15 @@
       "source_path": "skills/openclaw-shopify",
       "package_path": "packages/openclaw-shopify/openclaw-shopify-skill.zip",
       "sha256": "736350ea225bfadd1e8d9c9b19775297da68ea35a22d18c736afb7c80197f0a3"
+    },
+    {
+      "slug": "website-manager",
+      "name": "Website Manager",
+      "version": "0.2.0",
+      "status": "published",
+      "source_path": "skills/website-manager",
+      "package_path": "packages/website-manager/website-manager-skill.zip",
+      "sha256": "921104a0ef7cd69f970194162542e8e60aef1202f00dc2a06b8acfcec614f8bc"
     }
   ]
 }

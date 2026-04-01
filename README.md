@@ -10,3 +10,4 @@ Private paid Prompt Circle skills repository.
 ## Current Skills
 - `openclaw-manager` (draft)
 - `openclaw-shopify` (published)
+- `website-manager` (published)
