@@ -58,11 +58,11 @@
     {
       "slug": "website-manager",
       "name": "Website Manager",
-      "version": "0.3.0",
+      "version": "0.3.1",
       "status": "published",
       "source_path": "skills/website-manager",
       "package_path": "packages/website-manager/website-manager-skill.zip",
-      "sha256": "c1dbabb24b8115a632539fa183303487cd75f387e8bbce55316386c462fb214a"
+      "sha256": "d3bd09d0ade902fbbaa991cffc3a72e041daf90c03804c6210699f590d8a6760"
     }
   ]
 }

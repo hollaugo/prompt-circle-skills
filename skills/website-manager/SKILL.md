@@ -44,7 +44,7 @@ Automated Notion CMS creation and sync do require:
 
 Automated Netlify deploys do require:
 - `NETLIFY_AUTH_TOKEN`
-- `NETLIFY_SITE_ID`
+- optional `NETLIFY_SITE_ID` when deploying to an existing site
 
 Credential rule:
 - only request these values when the user wants automated CMS creation, CMS sync, or automated deploys
@@ -52,7 +52,8 @@ Credential rule:
 - for Notion, share a single parent page with the integration and create the CMS as child databases/pages beneath it
 - prefer the least-privileged Netlify token that can create deploys for the target site
 - do not assume these env vars exist just because the skill is installed
-- if the env vars are missing, fall back to a non-destructive path such as validation only or manual Netlify upload instructions
+- if `NETLIFY_SITE_ID` is missing, the deploy helper may create a new Netlify site automatically and persist the returned non-secret site identifiers
+- never store secrets in Notion or repo files; only store non-secret IDs and URLs
 
 Read as needed:
 - `references/default-stack.md` first for the opinionated baseline this skill should assume

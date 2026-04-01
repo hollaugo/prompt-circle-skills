@@ -46,8 +46,9 @@ Read this first. This is the opinionated default this skill should choose unless
 ## Default deployment model
 
 - first deploy without Git if the user is solo and non-technical
-- use Netlify zip deploy or Netlify Drop for the first release
+- use the Netlify deploy helper for the first release
 - add GitHub only when previews, reviews, or collaboration are needed
+- persist returned non-secret runtime ids to a local JSON file and optionally mirror them into Notion Site Settings
 
 ## Default live-vs-rebuild split
 

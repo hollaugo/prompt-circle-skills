@@ -13,6 +13,9 @@ Example:
     --site-type professional-services \
     --domain acmeadvisory.com \
     --city Toronto
+
+By default the script also writes the resulting non-secret Notion IDs to
+`website-manager.notion.json` in the current working directory.
 """
 
 from __future__ import annotations
@@ -21,6 +24,7 @@ import argparse
 import json
 import os
 import sys
+from pathlib import Path
 import urllib.error
 import urllib.request
 
@@ -463,6 +467,11 @@ def main() -> int:
         default=os.environ.get("NOTION_PARENT_PAGE_ID"),
         help="Shared Notion parent page ID. Defaults to NOTION_PARENT_PAGE_ID.",
     )
+    parser.add_argument(
+        "--save-json",
+        default="website-manager.notion.json",
+        help="Where to save the resulting non-secret Notion IDs. Use '-' to disable.",
+    )
     args = parser.parse_args()
 
     token = os.environ.get("NOTION_ACCESS_TOKEN") or os.environ.get("NOTION_TOKEN")
@@ -483,6 +492,8 @@ def main() -> int:
         print(f"ERROR: {exc}", file=sys.stderr)
         return 1
 
+    if args.save_json != "-":
+        Path(args.save_json).write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(result, indent=2))
     return 0
 

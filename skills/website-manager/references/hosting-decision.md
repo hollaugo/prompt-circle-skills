@@ -23,6 +23,9 @@ Default operating pattern:
 3. deploy with `scripts/netlify_zip_deploy.py`
 4. fall back to Netlify Drop only when a manual release is simpler
 
+Netlify rule:
+- if `NETLIFY_SITE_ID` is missing, create the site programmatically with the token and persist the returned site id and URLs
+
 ## When Cloudflare Pages fits better
 
 Choose Cloudflare Pages when:
