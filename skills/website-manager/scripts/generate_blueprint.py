@@ -5,7 +5,7 @@ Generate an opinionated Website Manager blueprint.
 Example:
   python3 scripts/generate_blueprint.py \
     --site-name "Acme Advisory" \
-    --site-type professional-services \
+    --site-type generic \
     --domain acmeadvisory.com \
     --city Toronto \
     --collection-name services
@@ -18,6 +18,17 @@ import json
 
 
 SITE_TYPE_DEFAULTS = {
+    "generic": {
+        "collections_label": "Content",
+        "homepage_sections": [
+            "Hero",
+            "Intro or positioning",
+            "Primary offerings or content grid",
+            "Proof or trust section",
+            "Featured content or updates",
+            "Primary CTA",
+        ],
+    },
     "professional-services": {
         "collections_label": "Services",
         "homepage_sections": [

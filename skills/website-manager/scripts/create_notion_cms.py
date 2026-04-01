@@ -10,7 +10,7 @@ Example:
   NOTION_ACCESS_TOKEN=... NOTION_PARENT_PAGE_ID=... \
   python3 scripts/create_notion_cms.py \
     --site-name "Acme Advisory" \
-    --site-type professional-services \
+    --site-type generic \
     --domain acmeadvisory.com \
     --city Toronto
 
@@ -35,6 +35,11 @@ DEFAULT_SAVE_JSON = ".website-manager/notion.json"
 
 
 SITE_TYPE_DEFAULTS = {
+    "generic": {
+        "collection_label": "Content",
+        "primary_color": "#1f4b99",
+        "accent_color": "#e0892b",
+    },
     "professional-services": {
         "collection_label": "Services",
         "primary_color": "#1b3a5c",

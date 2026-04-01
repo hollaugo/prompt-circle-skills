@@ -7,19 +7,8 @@ metadata:
     "openclaw":
       {
         "emoji": "🌐",
-        "requires":
-          {
-            "env":
-              [
-                "NOTION_ACCESS_TOKEN",
-                "NOTION_TOKEN",
-                "NOTION_PARENT_PAGE_ID",
-                "NETLIFY_AUTH_TOKEN",
-                "NETLIFY_SITE_ID",
-                "NETLIFY_ACCOUNT_SLUG",
-                "NETLIFY_SITE_NAME",
-              ],
-          },
+        "notes":
+          "Credentials are conditional. Only request Notion or Netlify env vars when the user explicitly wants automated CMS provisioning, sync, or deploys.",
       },
   }
 runtime_metadata:
@@ -76,6 +65,7 @@ Credential rule:
 - do not assume these env vars exist just because the skill is installed
 - if `NETLIFY_SITE_ID` is missing, the deploy helper may create a new Netlify site automatically and persist the returned non-secret site identifiers
 - never store secrets in Notion or repo files; only store non-secret IDs and URLs
+- if the user only wants planning, blueprinting, content modeling, or validation, do not request any secrets
 
 ## Persisted Files
 
@@ -92,7 +82,7 @@ Storage rule:
 
 Read as needed:
 - `references/default-stack.md` first for the opinionated baseline this skill should assume
-- `references/site-types/*.md` for visual direction and default token choices
+- `references/site-types/*.md` for visual direction and default token choices; use `generic.md` as the fallback when no specialized type clearly fits
 - `references/seo-aeo-geo.md` for metadata, schema, FAQ, and local SEO rules
 - `references/widgets-and-interactions.md` for widgets, filtering, search, pagination, and collection UX
 - `references/notion-cms-model.md` for the Notion database structure

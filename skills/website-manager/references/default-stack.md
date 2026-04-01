@@ -24,6 +24,12 @@ Read this first. This is the opinionated default this skill should choose unless
 - require a shared parent page id
 - create the CMS databases under that parent page
 
+## Default site-type rule
+
+- use a specialized site type only when the business clearly fits it
+- otherwise use the generic type
+- do not force a vertical-specific layout system onto broad or mixed-content websites
+
 ## Default route model
 
 - `/` homepage
