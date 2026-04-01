@@ -2,6 +2,20 @@
 name: website-manager
 description: Create, recreate, redesign, publish, and operate websites managed from Notion, including blogs, CMS-driven sections, widgets, filtering/search interactions, SEO/AEO/GEO improvements, and lightweight deployment workflows. Use when a user wants one skill that can both build and manage a website over time, with OpenClaw-friendly automation but no hard dependency on OpenClaw-specific tooling.
 homepage: https://docs.openclaw.ai/tools/skills
+runtime_metadata:
+  primary_credentials:
+    - NOTION_ACCESS_TOKEN
+    - NETLIFY_AUTH_TOKEN
+  optional_env_vars:
+    - NOTION_ACCESS_TOKEN
+    - NOTION_TOKEN
+    - NOTION_PARENT_PAGE_ID
+    - NETLIFY_AUTH_TOKEN
+    - NETLIFY_SITE_ID
+  privileged_operations:
+    - outbound_network_requests
+    - persistent_file_writes
+    - remote_deploys
 ---
 
 # Website Manager
@@ -20,6 +34,26 @@ This skill is for:
 
 Keep the output portable. The site should not become locked to one host or one agent platform unless the user explicitly asks for that.
 
+## Credentials
+
+Core website planning, content modeling, blueprint generation, and validation do not require secrets.
+
+Automated Notion CMS creation and sync do require:
+- `NOTION_ACCESS_TOKEN` or `NOTION_TOKEN`
+- `NOTION_PARENT_PAGE_ID` for the shared parent page where the CMS will be created
+
+Automated Netlify deploys do require:
+- `NETLIFY_AUTH_TOKEN`
+- `NETLIFY_SITE_ID`
+
+Credential rule:
+- only request these values when the user wants automated CMS creation, CMS sync, or automated deploys
+- prefer `NOTION_ACCESS_TOKEN` as the canonical variable name and treat `NOTION_TOKEN` as a compatible fallback
+- for Notion, share a single parent page with the integration and create the CMS as child databases/pages beneath it
+- prefer the least-privileged Netlify token that can create deploys for the target site
+- do not assume these env vars exist just because the skill is installed
+- if the env vars are missing, fall back to a non-destructive path such as validation only or manual Netlify upload instructions
+
 Read as needed:
 - `references/default-stack.md` first for the opinionated baseline this skill should assume
 - `references/site-types/*.md` for visual direction and default token choices
@@ -32,6 +66,7 @@ Read as needed:
 
 Use the helper scripts when useful:
 - `scripts/generate_blueprint.py` to generate the default site/CMS/publish blueprint
+- `scripts/create_notion_cms.py` to create the default Notion CMS under a shared parent page
 - `scripts/netlify_zip_deploy.py` to deploy a finished site to Netlify with the opinionated zip workflow
 
 ## When To Use It

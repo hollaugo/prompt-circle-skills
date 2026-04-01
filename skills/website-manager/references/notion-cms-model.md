@@ -2,6 +2,20 @@
 
 Use this model when the website should be managed in Notion.
 
+## Required access for automated CMS creation
+
+If the agent is expected to create the CMS automatically, it needs:
+- `NOTION_ACCESS_TOKEN` or `NOTION_TOKEN`
+- `NOTION_PARENT_PAGE_ID`
+
+Recommended default:
+- create one parent page such as `Website CMS`
+- share that page with the Notion integration
+- create all CMS databases as children of that parent page
+- use `scripts/create_notion_cms.py` to provision the default CMS layout and starter records
+
+Do not assume the integration can create top-level workspace content without the parent page being shared first.
+
 ## Principle
 
 Notion owns:
@@ -50,6 +64,7 @@ Default slug rule:
 - lowercase
 - words separated with hyphens
 - no leading or trailing slash
+- use `home` for the homepage row and map it to `/` in the publishing layer
 
 ### Collections or Services
 

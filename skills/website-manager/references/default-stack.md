@@ -18,6 +18,12 @@ Read this first. This is the opinionated default this skill should choose unless
 - `Blog Posts` database for editorial content
 - `Site Settings` database for global values
 
+## Default CMS provisioning rule
+
+- use a Notion internal integration token
+- require a shared parent page id
+- create the CMS databases under that parent page
+
 ## Default route model
 
 - `/` homepage
