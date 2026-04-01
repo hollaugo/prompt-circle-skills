@@ -15,7 +15,7 @@ Example:
     --city Toronto
 
 By default the script also writes the resulting non-secret Notion IDs to
-`website-manager.notion.json` in the current working directory.
+`.website-manager/notion.json`.
 """
 
 from __future__ import annotations
@@ -31,6 +31,7 @@ import urllib.request
 
 NOTION_VERSION = "2026-03-11"
 API_ROOT = "https://api.notion.com/v1"
+DEFAULT_SAVE_JSON = ".website-manager/notion.json"
 
 
 SITE_TYPE_DEFAULTS = {
@@ -469,7 +470,7 @@ def main() -> int:
     )
     parser.add_argument(
         "--save-json",
-        default="website-manager.notion.json",
+        default=DEFAULT_SAVE_JSON,
         help="Where to save the resulting non-secret Notion IDs. Use '-' to disable.",
     )
     args = parser.parse_args()
@@ -493,7 +494,9 @@ def main() -> int:
         return 1
 
     if args.save_json != "-":
-        Path(args.save_json).write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
+        save_path = Path(args.save_json)
+        save_path.parent.mkdir(parents=True, exist_ok=True)
+        save_path.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(result, indent=2))
     return 0
 

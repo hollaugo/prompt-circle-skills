@@ -25,6 +25,7 @@ Default operating pattern:
 
 Netlify rule:
 - if `NETLIFY_SITE_ID` is missing, create the site programmatically with the token and persist the returned site id and URLs
+- persist non-secret deploy metadata to `.website-manager/deploy.json` by default
 
 ## When Cloudflare Pages fits better
 

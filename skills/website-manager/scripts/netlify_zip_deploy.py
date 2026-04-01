@@ -11,7 +11,7 @@ Example:
   python3 scripts/netlify_zip_deploy.py ./site-output
 
 If NETLIFY_SITE_ID is missing, the script can create a new site first and then
-persist the returned non-secret site identifiers to `website-manager.deploy.json`.
+persist the returned non-secret site identifiers to `.website-manager/deploy.json`.
 """
 
 from __future__ import annotations
@@ -29,6 +29,7 @@ from pathlib import Path
 
 
 API_ROOT = "https://api.netlify.com/api/v1"
+DEFAULT_SAVE_JSON = ".website-manager/deploy.json"
 
 
 def build_zip(source_dir: Path) -> Path:
@@ -88,7 +89,7 @@ def main() -> int:
     parser.add_argument("--timeout", type=int, default=300, help="Polling timeout in seconds")
     parser.add_argument(
         "--save-json",
-        default="website-manager.deploy.json",
+        default=DEFAULT_SAVE_JSON,
         help="Where to save the resulting non-secret Netlify IDs and URLs. Use '-' to disable.",
     )
     args = parser.parse_args()
@@ -134,7 +135,9 @@ def main() -> int:
             "ssl_url": final.get("ssl_url"),
         }
         if args.save_json != "-":
-            Path(args.save_json).write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
+            save_path = Path(args.save_json)
+            save_path.parent.mkdir(parents=True, exist_ok=True)
+            save_path.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
         print(json.dumps(result, indent=2))
         return 0 if state == "ready" else 1
     except urllib.error.HTTPError as exc:

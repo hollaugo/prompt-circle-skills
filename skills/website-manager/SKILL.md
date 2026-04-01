@@ -2,6 +2,26 @@
 name: website-manager
 description: Create, recreate, redesign, publish, and operate websites managed from Notion, including blogs, CMS-driven sections, widgets, filtering/search interactions, SEO/AEO/GEO improvements, and lightweight deployment workflows. Use when a user wants one skill that can both build and manage a website over time, with OpenClaw-friendly automation but no hard dependency on OpenClaw-specific tooling.
 homepage: https://docs.openclaw.ai/tools/skills
+metadata:
+  {
+    "openclaw":
+      {
+        "emoji": "🌐",
+        "requires":
+          {
+            "env":
+              [
+                "NOTION_ACCESS_TOKEN",
+                "NOTION_TOKEN",
+                "NOTION_PARENT_PAGE_ID",
+                "NETLIFY_AUTH_TOKEN",
+                "NETLIFY_SITE_ID",
+                "NETLIFY_ACCOUNT_SLUG",
+                "NETLIFY_SITE_NAME",
+              ],
+          },
+      },
+  }
 runtime_metadata:
   primary_credentials:
     - NOTION_ACCESS_TOKEN
@@ -12,6 +32,8 @@ runtime_metadata:
     - NOTION_PARENT_PAGE_ID
     - NETLIFY_AUTH_TOKEN
     - NETLIFY_SITE_ID
+    - NETLIFY_ACCOUNT_SLUG
+    - NETLIFY_SITE_NAME
   privileged_operations:
     - outbound_network_requests
     - persistent_file_writes
@@ -54,6 +76,19 @@ Credential rule:
 - do not assume these env vars exist just because the skill is installed
 - if `NETLIFY_SITE_ID` is missing, the deploy helper may create a new Netlify site automatically and persist the returned non-secret site identifiers
 - never store secrets in Notion or repo files; only store non-secret IDs and URLs
+
+## Persisted Files
+
+The helper scripts may write non-secret runtime metadata to local JSON files.
+
+Default locations:
+- `.website-manager/notion.json`
+- `.website-manager/deploy.json`
+
+Storage rule:
+- review these files before committing or syncing them anywhere
+- they should contain IDs and URLs, not secrets
+- keep them local by default unless you intentionally want them in your project workflow
 
 Read as needed:
 - `references/default-stack.md` first for the opinionated baseline this skill should assume

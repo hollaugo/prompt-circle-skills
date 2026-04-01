@@ -13,7 +13,7 @@ Recommended default:
 - share that page with the Notion integration
 - create all CMS databases as children of that parent page
 - use `scripts/create_notion_cms.py` to provision the default CMS layout and starter records
-- persist the returned hub page id, database ids, and data source ids to a local JSON file
+- persist the returned hub page id, database ids, and data source ids to `.website-manager/notion.json`
 - mirror non-secret ids into Site Settings if the publishing workflow needs them there
 
 Do not assume the integration can create top-level workspace content without the parent page being shared first.
