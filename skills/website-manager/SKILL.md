@@ -23,6 +23,30 @@ runtime_metadata:
     - NETLIFY_SITE_ID
     - NETLIFY_ACCOUNT_SLUG
     - NETLIFY_SITE_NAME
+  conditional_env_vars:
+    planning_only: []
+    notion_cms_provisioning:
+      - NOTION_ACCESS_TOKEN
+      - NOTION_TOKEN
+      - NOTION_PARENT_PAGE_ID
+    notion_cms_sync:
+      - NOTION_ACCESS_TOKEN
+      - NOTION_TOKEN
+      - NOTION_PARENT_PAGE_ID
+    netlify_existing_site_deploy:
+      - NETLIFY_AUTH_TOKEN
+      - NETLIFY_SITE_ID
+    netlify_new_site_deploy:
+      - NETLIFY_AUTH_TOKEN
+      - NETLIFY_ACCOUNT_SLUG
+      - NETLIFY_SITE_NAME
+  credential_scope_guidance:
+    - Use a Notion internal integration scoped only to the shared parent page used for CMS creation and sync.
+    - Use the least-privileged Netlify token that can create deploys for the intended site or account.
+    - Do not provide Notion or Netlify credentials for blueprinting, planning, or validation-only runs.
+  local_runtime_outputs:
+    - .website-manager/notion.json
+    - .website-manager/deploy.json
   privileged_operations:
     - outbound_network_requests
     - persistent_file_writes
