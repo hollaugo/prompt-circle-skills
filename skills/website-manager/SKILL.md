@@ -6,7 +6,9 @@ metadata:
   {
     "openclaw":
       {
+        "skillKey": "website-manager",
         "emoji": "🌐",
+        "primaryEnv": "NOTION_ACCESS_TOKEN",
         "notes":
           "Credentials are conditional. Only request Notion or Netlify env vars when the user explicitly wants automated CMS provisioning, sync, or deploys.",
       },
