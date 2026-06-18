@@ -1,0 +1,128 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      skill_slug:
+        description: "Skill slug to package and release"
+        required: true
+      version_bump:
+        description: "Version bump type (major, minor, patch)"
+        required: true
+        default: "patch"
+
+jobs:
+  release:
+    name: Package and Release Skill
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install zipfile36
+
+      - name: Bump version and package skill
+        run: |
+          SKILL_DIR="skills/${{ inputs.skill_slug }}"
+          PACKAGE_DIR="packages/${{ inputs.skill_slug }}"
+          
+          # Check skill exists
+          if [ ! -d "$SKILL_DIR" ]; then
+            echo "::error::Skill ${{ inputs.skill_slug }} does not exist"
+            exit 1
+          fi
+          
+          # Bump version in SKILL.md
+          python -c "
+import re
+from pathlib import Path
+
+skill_dir = Path('$SKILL_DIR')
+skill_md = skill_dir / 'SKILL.md'
+content = skill_md.read_text()
+
+# Extract current version
+version_match = re.search(r'^version:\s*(\d+\.\d+\.\d+)', content, re.MULTILINE)
+if not version_match:
+    print('::error::Could not find version in SKILL.md')
+    exit(1)
+
+current_version = version_match.group(1)
+major, minor, patch = map(int, current_version.split('.'))
+
+# Bump version
+if '${{ inputs.version_bump }}' == 'major':
+    new_version = f'{major + 1}.0.0'
+elif '${{ inputs.version_bump }}' == 'minor':
+    new_version = f'{major}.{minor + 1}.0'
+else:
+    new_version = f'{major}.{minor}.{patch + 1}'
+
+# Update version in SKILL.md
+new_content = re.sub(
+    r'^version:\s*\d+\.\d+\.\d+',
+    f'version: {new_version}',
+    content,
+    flags=re.MULTILINE
+)
+skill_md.write_text(new_content)
+print(f'Bumped version from {current_version} to {new_version}')
+"
+          
+          # Create package
+          mkdir -p "$PACKAGE_DIR"
+          cd "$SKILL_DIR" && zip -r "../$PACKAGE_DIR/${{ inputs.skill_slug }}-skill.zip" .
+          
+          # Update manifest
+          python -c "
+import json
+import hashlib
+from pathlib import Path
+
+manifest_path = Path('manifests/skills.json')
+manifest = json.loads(manifest_path.read_text())
+
+# Find and update the skill
+skill_slug = '${{ inputs.skill_slug }}'
+for skill in manifest['skills']:
+    if skill['slug'] == skill_slug:
+        skill['version'] = '${{ steps.bump_version.outputs.new_version }}'
+        
+        # Calculate SHA256 of the package
+        package_path = Path(f'packages/{skill_slug}/{skill_slug}-skill.zip')
+        if package_path.exists():
+            with open(package_path, 'rb') as f:
+                skill['sha256'] = hashlib.sha256(f.read()).hexdigest()
+        break
+else:
+    print(f'::error::Skill {skill_slug} not found in manifest')
+    exit(1)
+
+manifest_path.write_text(json.dumps(manifest, indent=2) + '\n')
+print('Updated manifest')
+"
+
+      - name: Commit changes
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add .
+          git commit -m "Release ${{ inputs.skill_slug }} v${{ steps.bump_version.outputs.new_version }}"
+          git push
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ inputs.skill_slug }}-v${{ steps.bump_version.outputs.new_version }}
+          name: ${{ inputs.skill_slug }} v${{ steps.bump_version.outputs.new_version }}
+          files: packages/${{ inputs.skill_slug }}/${{ inputs.skill_slug }}-skill.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
